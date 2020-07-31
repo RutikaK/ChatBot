@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <title>My first bot</title>
+        <style>
+            body {
+    background-color:rgb(12, 245, 63);
+    }
+textarea {
+     background-color:black; 
+     color:white;
+    }
+        </style>
+    </head>
+    <body  style="text-align:center;">   
+    <textarea readonly="true" id="botChat" 
+       style="text-align:left; 
+       position:fixed; 
+       display:block; 
+       top:3vh;
+       border:1px solid black;
+       width:92.5vw; 
+       margin-left:1%; 
+       margin-right:2.25%;
+       height:75vh; 
+       resize:none;
+       font-family:Courier; 
+       overflow-y:auto;
+       user-select:none;
+       font-size:20px;">
+    </textarea>     
+    <p style="position:absolute;
+        border:1px solid black;
+        top:78vh;
+        left:12.25vw;
+        width:75vw;">   
+    <input type="text" placeholder="Ask a question" onKeypress="enterButton(event, document.getElementsByTagName('input')[0].value);" style="color:red; background-color:black; width:79%;"> 
+    <button onClick="answer(document.getElementsByTagName('input')[0].value)">Talk To Me</button></p>     
+<script>
+    
+var you = "Me";
+botSays("\t\t\t\tWelcome To Cloud Counselage\n\tWant to know more about us then reply with 'Yes' in Ask me question section. ")
+            // Recognized Speech Patterns for Question Responses
+            
+
+var Goodbye = ["BYE", "SEE YA", "CYA", "LATER", "ADIOS", "SAYONARA", "SEEYA"]
+var Name = [ "WHAT IS YOUR NAME", "WHAT'S YOUR NAME", "WHO ARE YOU", "WHAT DO THEY CALL YOU", "COMO TE LLAMAS"]
+var Actions = ["YES", "DRINK", "CHALLENGE"]
+var Questions = ["QUESTION", "QUIZ", "CODE", "ANSWER", "HTML", "CSS", "JAVASCRIPT"]
+var HTMLTags1 = ["<P>", "<I>", "<SPAN>", "<DIV>", "<ARTICLE>", "<IFRAME>", "<A>", "<ABBR>","<ADDRESS>","<AUDIO>"]
+var Numbers= ["A","B","C","D","E"] 
+var Stars=["MORE","MORE1","MORE2"]
+var Num=["B"]; var Num1=["C"]; var Num2=["D"]; var Num4=["*"]; var Num5=["**"]
+var q1=["Z1"]; var q2=["Z2"]; var q3=["Z3"]; var q4=["Z4"]; var q5=["Z5"]; var q6=["Z6"]
+
+
+
+var d1=["Q1"];var d2=["Q2"];var d3=["Q3"];var d4=["Q4"];var d5=["Q5"];var d6=["Q6"];var d7=["Q7"];var d8=["Q8"];var d9=["Q9"];var d10=["F10"];
+
+var d11=["G11"];var d12=["H12"];var d13=["I13"];var d14=["J14"];var d15=["K15"];var d16=["L16"];var d17=["M17"];var d18=["N18"];var d19=["O19"];var d20=["P20"];
+
+var d21=["F21"];var d22=["G22"];var d23=["H23"];var d24=["I24"];var d25=["J25"];var d26=["K26"];var d27=["L27"];var d28=["M28"];var d29=["N29"];var d30=["O30"];
+
+var d31=["P31"];var d32=["F32"];var d33=["G33"];var d34=["H34"];var d35=["I35"];var d36=["J36"];var d37=["K37"];var d38=["L38"];var d39=["M39"];var d40=["N40"];
+
+var d41=["O41"];var d42=["F42"];var d43=["G43"];var d44=["H44"];var d45=["I45"];var d46=["J46"];var d47=["K47"];var d48=["L48"];var d49=["M49"];var d50=["N50"];
+
+var d51=["O51"];var d52=["F52"];var d53=["G53"];var d54=["H54"];var d55=["I55"];var d56=["J56"];var d57=["K57"];var d58=["L58"];var d59=["M59"];var d60=["N60"];
+
+var d61=["O61"];var d62=["F62"];var d63=["G63"];var d64=["H64"];var d65=["I65"];var d66=["J66"];var d67=["K67"];var d68=["L68"];var d69=["M69"];var d70=["N70"];
+
+var d71=["O71"];var d72=["F72"];var d73=["G73"];var d74=["H74"];var d75=["I75"];var d76=["J76"];var d77=["K77"];var d78=["L78"];var d79=["M79"];var d80=["N80"];
+
+var d81=["O81"]
+      
+
+var colors = ["BLUE", "RED", "GREEN", "YELLOW", "WHITE", "BLACK", "SILVER", "GRAY" ];
+var Else = true;
+var questions = [colors, HTMLTags4, HTMLTags3, HTMLTags2, HTMLTags1, Hello, Goodbye, Greeting, Name, Actions, Questions];
+
+
+var reactions=[BotHello, BotGoodbye,BotGreeting];
+var BotHello = ["HI", "HEY", "HOWDY", "HEYA", "HOLA", "HELLO", "SUP", "KONNICHIWA", "ALOHA"]
+var BotGoodbye = ["BYE", "SEE YA", "CYA", "LATER", "ADIOS", "SAYONARA", "SEEYA"]
+var BotGreeting = ["WHAT'S UP", "HOW'S IT GOING", "HOW ARE YOU", "NICE TO SEE YOU", "GOOD MORNING", "WELCOME"]
+var BotPleasant = ["Thanks.", "Good job.", "Cool.", "I see.", "Anyway.", "right-o."]
+
+function answer(x) {
+    var botOut = botChat.value;
+    document.getElementsByTagName("textarea")[0] = botChat
+    //RESPONSES//
+
+    document.getElementsByTagName("input")[0].value = ""
+        if (x.charAt(0).includes("!") === false)
+            {
+            youSay(x); botChat.scrollTop = botChat.scrollHeight;
+            } 
+                
+            question = x.toUpperCase()
+            for (i = 0; i < 10; i++)
+             {           
+                if (question === "" || null) {
+                    setTimeout( function() { botSays("\nBot : What? You shy?"); botChat.scrollTop = botChat.scrollHeight;}, 600); return; }
+               
+ /* Questions, Answers and Responses */
+                if (question.includes(Goodbye[i])) {
+                    Else = false;
+                    setTimeout(botSays, 600, "\
+                                 Bot : Godspeed. Leave an upvote?")
+                } 
+                
+                 if (question.includes(Name[i])) {
+                    Else = false; setTimeout(botSays, 600, "\nBot : My name is BotOne. You can call me tonE.")
+                } 
+
+                 
+                else if ( question.includes(Numbers[i]) ) {
+                    Else = false;
+                    if (Numbers[i] === "A" ) { setTimeout(botSays,600,"\nBot: Watch the below video URL: https://www.youtube.com/watch?time_continue=142&v=OnKfrQrEOrk&feature=emb_logo Need any more assistance reply with More\n\n") } 
+                }
+
+                else if ( question.includes(Num[i]) ) {
+                    Else = false;
+                    if (Num[i] === "B" ) { setTimeout(botSays,600,"\nBot: Hello Watch the below video URL: https://www.youtube.com/watch?time_continue=142&v=OnKfrQrEOrk&feature=emb_logo Need any more assistance reply with More\n\n") } 
+                }
+                
+                
+                else if ( question.includes(Num1[i]) ) {
+                    Else = false;
+                    if (Num1[i] === "C" ) { setTimeout(botSays,600,"\nBot: Please reply with the corresponding Question number to get your queries Cleared.\nZ1. I m not able to access my Bitrix24 account?\nZ2. What is the job profile? Will we be able to work only in the tech we have chosen for the\tinternship?\nZ3. How many workgroups will an intern be a part of?/ How many workgroups should I be in?\nZ4. I am not able to see my tasks?\nZ5. What do we do in the work report?\nZ6. I am having trouble finding the workgroup ( no workgroup is visible).\nReply with more to go back to the previous menu\n\n") }                                                      
+                }
+                 
+                 
+                else if ( question.includes(q1[i]) ) {
+                    Else = false;
+                    if (q1[i] === "Z1" ) { setTimeout(botSays,600,"\nQuestion) I m not able to access my Bitrix24 account?\nAnswer) Go to https://cloudcounselage24.bitrix24.com/ On the Login page, In the, ‘Enter the phone number or email’, type in your email id that you have registered with Cloud Counselage and Click ‘Forgot Password’. In case the problem persists, please write a mail to hrsupport@cloudcounselage.in.\n Reply with * to go pevious menu\n\n") } 
+                }
+
+                else if ( question.includes(q2[i]) ) {
+                    Else = false;
+                    if (q2[i] === "Z2" ) { setTimeout(botSays,600,"\nQuestion) What is the job profile? Will we be able to work only in the tech we have chosen for the internship?\nAnswer) Your job profile is 'Technology - Intern'; if you're in cloud computing technology to update in your LinkedIn or resume, you can write as 'Cloud Computing - Intern'. Yes, you'll only work in the technology you're selected for but you can take the training of other technologies.\n Reply with * to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(q3[i]) ) {
+                    Else = false;
+                    if (q3[i] === "Z3" ) { setTimeout(botSays,600,"\nQuestion) How many workgroups will an intern be a part of?/ How many workgroups should I be in?\nAnswer) Every intern should be a part of 2 workgroups.\n   1.'202003-IP' -- This is a general workgroup. Everyone who is enrolled in IP should be a part of this workgroup.\n   2.'202003-IP-Technology'-- This is a technology-specific workgroup. You'll be added to the technology you had enrolled for. For example '202003-IP-Python' for students who enrolled for python.\n Reply with * to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(q4[i]) ) {
+                    Else = false;
+                    if (q4[i] === "Z4" ) { setTimeout(botSays,600,"\nQuestion) I am not able to see my tasks.\nAnswer) Please remove the default 'In Progress' from your filter of the task section and try.\n Reply with * to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(q5[i]) ) {
+                    Else = false;
+                    if (q5[i] === "Z5" ) { setTimeout(botSays,600,"\nQuestion) What do we do in the work report?\nAnswer) As mentioned in the video, please write what you have done this week and request approval from your supervisor by clicking on 'send to supervisor'.\n Reply with * to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(q6[i]) ) {
+                    Else = false;
+                    if (q6[i] === "Z6" ) { setTimeout(botSays,600,"\nQuestion) I am having trouble finding the workgroup ( no workgroup is visible)\nAnswer) Please ensure that you have connected to the drive of that workgroup by going to your notification and connecting to the drive of that workgroup. If that is done, please try to search for your workgroup in the search bar at the top of your screen. To search, use the keywords, 202003-IP-TechnologyName. Ex '202003-IP-DevOps'. In case there is no invitation to you, please message Cloud Counselage HR. You will be added to 2 groups “202003-IP” which is a general workgroup and the other one is “202003-IP-Technology” which is a technology-specific workgroup.\n Reply with * to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(Num4[i]) ) {
+                    Else = false;
+                    if (Num4[i] === "*" ) { setTimeout(botSays,600,"\nBot: Please reply with the corresponding Question format  to get your queries Cleared.\nZ1. I m not able to access my Bitrix24 account?\nZ2. What is the job profile? Will we be able to work only in the tech we have chosen for the\tinternship?\nZ3. How many workgroups will an intern be a part of?/ How many workgroups should I be in?\nZ4. I am not able to see my tasks?\nZ5. What do we do in the work report?\nZ6. I am having trouble finding the workgroup ( no workgroup is visible).\nReply with more to go back to the previous menu\n\n") }                                                     
+                                                                    
+                }
+                
+                else if ( question.includes(Num2[i]) ) {
+                    Else = false;
+                    if (Num2[i] === "D" ) { setTimeout(botSays,600,"\nBot: Please reply with the Q1 format to get your queries Cleared.\nQ1. Not able to access the LP1 page with my token/ When I put my token it redirects me to the home page/ Getting error while accessing the page-'User Not Found'/Website Redirection Issue/Tokens not working.\nQ2. Login issues with training/ for every module of LP1/ LP2, do we have to register again for access to the content?\nQ3. I am applying my 2nd token that is the LP1 then it shows invalid user but the first token was accepted. What should I do?/ Tokens not working \nQ4. I did follow the instructions given in the video, but still, I'm not able to log in for the LP1 task \nQ5. Do I need to pass with the certificate in training.\nQ6. I tried it 3-4 times and have to enter token each time I visit it. \nQ7. I just joined the group and I am not understanding what to do further. How do I start my internship? \nQ8. What do I do after completing the quiz? how to complete the entire lp1. \nQ9. Do I need to register every time I do different tasks of lp1? \nF10. I have complete one training, I didn't find any options to continue my training. \nG11. I am not getting results of the training. \nH12. Unable to access the quiz \nI13.  What to do after completing LP1/ LP2/ LP3? \nJ14. Which Browser I should use? \nK15. Do we need to complete all the six steps within 14 hours as you mentioned that we have to complete all the 6 steps within 2 weeks so it becomes 14 hours? \nL16.  I had press finished button of LP1 task but want to resume the task, how to do that? \nM17.  The web pages on mobile are not showing properly. \nN18.  I have opted for a blockchain internship, can I also learn about AI and do an internship in both?  \nO19.  Can I switch my technology now? / I had enrolled for two technologies at the time of form-filling and got selected for the technology I’m not interested in. \nP20.  Can you help me by telling how can I get to know about my progress of LP 1? \nF21. I am not able to view a page/ I am logged in the training and still the website asks me to login? \nG22. When does the LP1/ LP2/ LP3 begin dates and deadline/ end date? \nH23. What happens in LP2? What kind of training can we expect? Is it a Basic/Advance level?\nI24. What happens in LP3? What kind of training can we expect? Is it a Basic/Advance level? \nJ25.  What to do after LP3? \nK26. Can we skip any training if we are already clear with the basics?\nL27. Is it ok to clock-out before an hour is completed if the tasks are completed? Do we need to clock-in and compulsorily complete 7 hours a week even if the tasks are completed? \nM28. Resource links not working. What to do? Should we skip? \nN29. What to do when our university exams start? \nO30. Is it okay to mention this internship as ongoing for college records? \nP31. Can we do another internship with IP? \nF32. What to do after Live Projects? Are we getting an offer letter/Stipend? \nG33. When will we get a joining letter? \nH34. When will we get an internship completion letter?\nI35.  What will be the projects in AI/ ML/ etc. technologies in LP3/ Live Projects? \nJ36. Not able to see the task as not part of the IP workgroup. \nK37. Live Project/ LP3 has to be submitted individually or it will be a group project? \nL38. How can we check our weekly hours? \nM39. Is it necessary to attend LP1 for other domains as well if we want to take its training.\nN40. Why only this training for LP2? \nO41. Could I have done this training from other websites/ resources?\nF42. Can I do certification for the training provided in LP2? \nG43. The videos of LP2 are taking too much time to load.\nH44. Are LP1/ LP2/ LP3 a part of the Live Project?\nI45. Will these training be enough for us to complete the LP3 and Live Project. \nJ46.  How do I access my quiz?\nK47. By when will we receive access to Bitrix24?\nL48. Can my friends still apply for the Internship Program (IP) - Maharashtra? Can we create awareness about this internship? Can we be the representative for Cloud Counselage in our college?\nM49.  Is the induction online or offline?\nN50. I am trying to complete social media tasks. I completed that day and clicked finish but it didn't show finished in the task menu. What should I do?\nO51. My Efficiency is 0% what should I do?\nF52. Will you provide mentorship or doubt clearing sessions in this internship?\nG53. Problem statements of the Live Project will be chosen by the intern or will be provided by Cloud Counselage?\nH54. Can we be a part of your future development team?/ Can we be hired by Cloud Counselage after this internship? \nI55. Can we visit the office? How many times do we have to visit the office for this internship?\nJ56. Can we extend this internship? \nK57.  If we are working on more than one technology, are those technologies added to the certificate? \nL58. Will Live Projects have only one technology or a mixture of technologies?\nM59.  I forgot to clock in for a few days, will this affect my internship?\nN60. Will I get LP3 and Live project of technology other than what I am selected for? \nO61.  I have not been added to the technology I preferred to work on? \nF62. What are the company policies for IP interns?\nG63.  I have not got the acknowledgment from you regarding the weekly report.\nH64.  In my work time I can see one exclamation mark?/ What does the remaining time mean?\nI65. I could not attend the induction last time, can I get an online induction again?/ I want some points said in the introduction, where can I get them.\nJ66. Can I just finish the task that you have just uploaded as I have attended the live induction session on 22nd of march\nK67. I have got another attachment called ‘noname’ or ‘win.dat’ with my Appointment letter, what should I do about it? Will it cause any harm? \nL68. Where do we push the code in LP3?\nM69.  Where should we share our hacker rank id/ where should we share the link/ anything relate to LP3 assignment submission?\nN70.  Where should we share our hacker rank id/ where should we share the link/ anything relate to LP3 assignment submission?\nO71. Live project's use case will be provided or can we have our own use case?\nF72. Is it necessary to clock-in if I am done with my tasks?\nG73. Can we be online after 1 hr in a day? \nH74.  I am stuck in LP3/ Live project with a technical issue, Is there any technical person who can help in this?\nI75.  One of my friends had applied for the IP but she didn't receive any further updates.\nJ76.  I have a query with respect to LP3, what should I do and whom should I ask?\nK77. I didn't get my appointment letter yet.\nL78. For some reason, I'm unable to download my LP3 assignment problem statement document shared on LP3 page, is there any other way I can get it?\nM79.  If my technology is IOT/ AI/ ML/ etc., do I still have to complete the mandatory training for LP1 'Cloud Computing'?\nN80. When will the step 3 of the internship program start?\nO81. I  am getting an error:: Exception: SQLSTATE[HY000]: General error: 1 no such table: layout, what should I do?\n Want to know answers of above questions reply with 'Q1' format.\nReply with more to go back to the previous menu\n\n") }                                                      
+                }
+                
+                 
+                else if ( question.includes(Num5[i]) ) {
+                    Else = false;
+                    if (Num5[i] === "**" ) { setTimeout(botSays,600,"\nBot: Please reply with the Q1  format to get your queries Cleared.\nQ1. Not able to access the LP1 page with my token/ When I put my token it redirects me to the home page/ Getting error while accessing the page-'User Not Found'/Website Redirection Issue/Tokens not working.\nQ2. Login issues with training/ for every module of LP1/ LP2, do we have to register again for access to the content?\nQ3. I am applying my 2nd token that is the LP1 then it shows invalid user but the first token was accepted. What should I do?/ Tokens not working \nQ4. I did follow the instructions given in the video, but still, I'm not able to log in for the LP1 task \nQ5. Do I need to pass with the certificate in training.\nQ6. I tried it 3-4 times and have to enter token each time I visit it. \nQ7. I just joined the group and I am not understanding what to do further. How do I start my internship? \nQ8. What do I do after completing the quiz? how to complete the entire lp1. \nQ9. Do I need to register every time I do different tasks of lp1? \nF10. I have complete one training, I didn't find any options to continue my training. \nG11. I am not getting results of the training. \QH12. Unable to access the quiz \nI13.  What to do after completing LP1/ LP2/ LP3? \nJ14. Which Browser I should use? \nK15. Do we need to complete all the six steps within 14 hours as you mentioned that we have to complete all the 6 steps within 2 weeks so it becomes 14 hours? \nL16.  I had press finished button of LP1 task but want to resume the task, how to do that? \nM17.  The web pages on mobile are not showing properly. \nN18.  I have opted for a blockchain internship, can I also learn about AI and do an internship in both?  \nO19.  Can I switch my technology now? / I had enrolled for two technologies at the time of form-filling and got selected for the technology I’m not interested in. \nP20.  Can you help me by telling how can I get to know about my progress of LP 1? \nF21. I am not able to view a page/ I am logged in the training and still the website asks me to login? \nG22. When does the LP1/ LP2/ LP3 begin dates and deadline/ end date? \nH23. What happens in LP2? What kind of training can we expect? Is it a Basic/Advance level?\nI24. What happens in LP3? What kind of training can we expect? Is it a Basic/Advance level? \nJ25.  What to do after LP3? \nK26. Can we skip any training if we are already clear with the basics?\nL27. Is it ok to clock-out before an hour is completed if the tasks are completed? Do we need to clock-in and compulsorily complete 7 hours a week even if the tasks are completed? \nM28. Resource links not working. What to do? Should we skip? \nN29. What to do when our university exams start? \nO30. Is it okay to mention this internship as ongoing for college records? \nP31. Can we do another internship with IP? \nF32. What to do after Live Projects? Are we getting an offer letter/Stipend? \GQ33. When will we get a joining letter? \nH34. When will we get an internship completion letter?\IQ35.  What will be the projects in AI/ ML/ etc. technologies in LP3/ Live Projects? \nJ36. Not able to see the task as not part of the IP workgroup. \nK37. Live Project/ LP3 has to be submitted individually or it will be a group project? \nL38. How can we check our weekly hours? \nM39. Is it necessary to attend LP1 for other domains as well if we want to take its training.\nN40. Why only this training for LP2? \nO41. Could I have done this training from other websites/ resources?\nF42. Can I do certification for the training provided in LP2? \nG43. The videos of LP2 are taking too much time to load.\H44. Are LP1/ LP2/ LP3 a part of the Live Project?\nI45. Will these training be enough for us to complete the LP3 and Live Project. \nJ46.  How do I access my quiz?\nK47. By when will we receive access to Bitrix24?\nL48. Can my friends still apply for the Internship Program (IP) - Maharashtra? Can we create awareness about this internship? Can we be the representative for Cloud Counselage in our college?\nM49.  Is the induction online or offline?\nN50. I am trying to complete social media tasks. I completed that day and clicked finish but it didn't show finished in the task menu. What should I do?\nO51. My Efficiency is 0% what should I do?\nF52. Will you provide mentorship or doubt clearing sessions in this internship?\nG53. Problem statements of the Live Project will be chosen by the intern or will be provided by Cloud Counselage?\nH54. Can we be a part of your future development team?/ Can we be hired by Cloud Counselage after this internship? \nI55. Can we visit the office? How many times do we have to visit the office for this internship?\nJ56. Can we extend this internship? \nK57.  If we are working on more than one technology, are those technologies added to the certificate? \nL58. Will Live Projects have only one technology or a mixture of technologies?\nM59.  I forgot to clock in for a few days, will this affect my internship?\nN60. Will I get LP3 and Live project of technology other than what I am selected for? \nO61.  I have not been added to the technology I preferred to work on? \nF62. What are the company policies for IP interns?\nG63.  I have not got the acknowledgment from you regarding the weekly report.\nH64.  In my work time I can see one exclamation mark?/ What does the remaining time mean?\nI65. I could not attend the induction last time, can I get an online induction again?/ I want some points said in the introduction, where can I get them.\nJ66. Can I just finish the task that you have just uploaded as I have attended the live induction session on 22nd of march\nK67. I have got another attachment called ‘noname’ or ‘win.dat’ with my Appointment letter, what should I do about it? Will it cause any harm? \nL68. Where do we push the code in LP3?\nM69.  Where should we share our hacker rank id/ where should we share the link/ anything relate to LP3 assignment submission?\nN70.  Where should we share our hacker rank id/ where should we share the link/ anything relate to LP3 assignment submission?\nO71. Live project's use case will be provided or can we have our own use case?\nF72. Is it necessary to clock-in if I am done with my tasks?\nG73. Can we be online after 1 hr in a day? \nH74.  I am stuck in LP3/ Live project with a technical issue, Is there any technical person who can help in this?\nI75.  One of my friends had applied for the IP but she didn't receive any further updates.\nJ76.  I have a query with respect to LP3, what should I do and whom should I ask?\nK77. I didn't get my appointment letter yet.\nL78. For some reason, I'm unable to download my LP3 assignment problem statement document shared on LP3 page, is there any other way I can get it?\nM79.  If my technology is IOT/ AI/ ML/ etc., do I still have to complete the mandatory training for LP1 'Cloud Computing'?\nN80. When will the step 3 of the internship program start?\n081. I  am getting an error:: Exception: SQLSTATE[HY000]: General error: 1 no such table: layout, what should I do?\n Want to know answers of above questions reply with 'Q1' format.\nReply with more to go back to the previous menu\n\n") }                                                      
+                }
+                
+
+                else if ( question.includes(d1[i]) ) {
+                    Else = false;
+                    if (d1[i] === "Q1" ) { setTimeout(botSays,600,"\nQ) Not able to access the LP1 page with my token/ When I put my token it redirects me to the home page/ Getting error while accessing the page- 'User Not Found'/Website Redirection Issue/Tokens not working.\nA) Please watch the videos shared with the invite and you should not face any problems in accessing the training. Please follow the protocol shown in the videos.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d2[i]) ) {
+                    Else = false;
+                    if (d2[i] === "Q2" ) { setTimeout(botSays,600,"\nQ) Login issues with training/ for every module of LP1/ LP2, do we have to register again for access to the content?\nA) Yes, you need to register for every module of training. Some of you are facing login issues, we have kept the training visible without login. Even then, to post a comment and give a quiz you'll have to login. In case you face difficulty to do so, please try to perform your quiz or post a comment by using a different browser or incognito mode.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                 
+                else if ( question.includes(d3[i]) ) {
+                    Else = false;
+                    if (d3[i] === "Q3" ) { setTimeout(botSays,600,"\nQ) I am applying my 2nd token that is the LP1 then it shows invalid user but the first token was accepted. What should I do?/ Tokens not working\nA) For each training of LP1, there are different tokens. Please read the tasks or watch the videos again meticulously. Try accessing it in incognito mode.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                  
+                else if ( question.includes(d4[i]) ) {
+                    Else = false;
+                    if (d4[i] === "Q4" ) { setTimeout(botSays,600,"\nQ) I did follow the instructions given in the video, but still, I'm not able to log in for the LP1 task\nA) Ensure you're using the right token\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d5[i]) ) {
+                    Else = false;
+                    if (d5[i] === "Q5" ) { setTimeout(botSays,600,"\nQ) Do I need to pass with the certificate in training.\nA) No, but please ensure you complete the training.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d6[i]) ) {
+                    Else = false;
+                    if (d6[i] === "Q6" ) { setTimeout(botSays,600,"\nQ) I tried it 3-4 times and have to enter token each time I visit it.\nA) We understand that it sometimes becomes tedious to access the training and we highly appreciate your support in making the training possible. We only do this for security reasons and we're trying to find a way to minimise the token use. For now, please note that in LP1 there are 3 types tokens:\n1. One for each technology, you're a part of.\n2. The lp1 home page.\n3. The 6 tokens (one for each step)\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d7[i]) ) {
+                    Else = false;
+                    if (d7[i] === "Q7" ) { setTimeout(botSays,600,"\nQ) I just joined the group and I am not understanding what to do further. How do I start my internship?\nA) Please go through the mail from which you have accepted the invite and check the task section as well.\n Reply with ** to go previous menu\n\n") } 
+                }
+                else if ( question.includes(d8[i]) ) {
+                    Else = false;
+                    if (d8[i] === "Q8" ) { setTimeout(botSays,600,"\nQ) What do I do after completing the quiz? how to complete the entire lp1\nA) There are tokens for each training in the task, if this learning path is done, please wait for the next learning path to begin and then please try to finish it. If you are done with LP3 please wait for Live Projects to begin.\n Reply with ** to go previous menu\n\n") } 
+                }
+                else if ( question.includes(d9[i]) ) {
+                    Else = false;
+                    if (d9[i] === "Q9" ) { setTimeout(botSays,600,"\nQ) Do I need to register every time I do different tasks of lp1?\nA) There are codes in the LP1 assignment, and each time you have to register also, please check your task description.\n Reply with ** to go previous menu\n\n") } 
+                }
+                else if ( question.includes(d10[i]) ) {
+                    Else = false;
+                    if (d10[i] === "F10" ) { setTimeout(botSays,600,"\nQ) I have complete one training, I didn't find any options to continue my training.\nA) Go back to the technology Page. Enter the respective tokens and then work. follow the same process every time.\n Reply with ** to go previous menu\n\n") } 
+                }
+                else if ( question.includes(d11[i]) ) {
+                    Else = false;
+                    if (d11[i] === "G11" ) { setTimeout(botSays,600,"\nQ) Q) I am not getting results of the training.\nA) They are just for your practice and not for our record, so you don't need the results of LP1 and LP2 training.\n Reply with ** to go previous menu\n\n") } 
+                }
+                else if ( question.includes(d12[i]) ) {
+                    Else = false;
+                    if (d12[i] === "H12" ) { setTimeout(botSays,600,"\nQ) Unable to access the quiz\nA) Please retry after some time in an incognito window\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d13[i]) ) {
+                    Else = false;
+                    if (d13[i] === "I13" ) { setTimeout(botSays,600,"\nQ) What to do after completing LP1/ LP2/ LP3?\nA) Mark your task as finished and wait for the next instructions.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d14[i]) ) {
+                    Else = false;
+                    if (d14[i] === "J14" ) { setTimeout(botSays,600,"\nQ) Which Browser I should use?\nA) Google Chrome is recommended.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d15[i]) ) {
+                    Else = false;
+                    if (d15[i] === "K15" ) { setTimeout(botSays,600,"\n Q) Do we need to complete all the six steps within 14 hours as you mentioned that we have to complete all the 6 steps within 2 weeks so it becomes 14 hours?\nA) It's preferred if you complete the LP1 training in 2 weeks but not mandatory. LP1, LP2, and LP3 are expected to be completed before the live projects start in July; but that doesn't mean you should give anything less than 1 hour a day or 7 hours a week towards the learning paths (LP).\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+
+                else if ( question.includes(d16[i]) ) {
+                    Else = false;
+                    if (d16[i] === "L16" ) { setTimeout(botSays,600,"\nQ) I had press finished button of LP1 task but want to resume the task, how to do that?\nA) You can go back to that task and then click on 'More' and then 'resume' to restart that task.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d17[i]) ) {
+                    Else = false;
+                    if (d17[i] === "M17" ) { setTimeout(botSays,600,"\nQ) The web pages on mobile are not showing properly.\nA) They are purposefully only configured for Desktops/ Laptops. In an emergency, you can use the 'show as desktop' mode of your browser.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d18[i]) ) {
+                    Else = false;
+                    if (d18[i] === "N18" ) { setTimeout(botSays,600,"\nQ) I have opted for a blockchain internship, can I also learn about AI and do an internship in both? \nA) You can learn both the technologies using Learning Path 2 (LP2) which will begin after the 2nd week of March, but your internship will only be continuing with the one you are selected for.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d19[i]) ) {
+                    Else = false;
+                    if (d19[i] === "O19" ) { setTimeout(botSays,600,"\nQ) Can I switch my technology now? / I had enrolled for two technologies at the time of form-filling and got selected for the technology I’m not interested in.\nA) You cannot switch the technology currently. You have to continue with the one you are selected for. In the case of multiple form entries, you just got selected for one of them; the first one that you entered. You cannot make a switch right now.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d20[i]) ) {
+                    Else = false;
+                    if (d20[i] === "P20" ) { setTimeout(botSays,600,"\nQ) Can you help me by telling how can I get to know about my progress of LP 1\nA) There is no metric to score your progress in any learning paths as it will be at a different pace for every individual.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d21[i]) ) {
+                    Else = false;
+                    if (d21[i] === "F21" ) { setTimeout(botSays,600,"\nQ) I am not able to view a page/ I am logged in the training and still the website asks me to login\nA) This could be because of some issue in the cookies or extension in your browser. Please try again with a different browser or open the tab with incognito mode. Also, you don't need to record your results, the quizzes are only for your knowledge check and not a metric to score you.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d22[i]) ) {
+                    Else = false;
+                    if (d22[i] === "G22" ) { setTimeout(botSays,600,"\n Q) When does the LP1/ LP2/ LP3 begin dates and deadline/ end date?\nA) The dates to begin the learning paths (LP) are: - \nLP1 - 01/03/2020\nLP2 - 18/03/2020\nLP3 - 02/04/2020 \nAll learning Paths (LP) are expected to be completed by the interns before the first   week of June as Live Projects will begin in that time frame.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d23[i]) ) {
+                    Else = false;
+                    if (d23[i] === "H23" ) { setTimeout(botSays,600,"\nQ) What happens in LP2? What kind of training can we expect? Is it a Basic/Advance level?\nA) The main focus of LP2 is to provide you with a basic foundation of the technology you're interested in. The training is also handpicked in such a way that they enable you to work on LP3 assignments which interim gives you the beginning to start your study for the selected technology and in no terms is the only/ final training you should look into. Please keep learning after your LP2 is complete, that is the only way to grow in your technology of choice.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d24[i]) ) {
+                    Else = false;
+                    if (d24[i] === "I24" ) { setTimeout(botSays,600,"\n Q) What happens in LP3? What kind of training can we expect? Is it a Basic/Advance level?\nA) LP3 will be assignment based and its execution and content vary from technology to technology. This assignment will be like a mini-project for all interns in a particular technology which will be verified by Cloud Counselage Project Managers.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d25[i]) ) {
+                    Else = false;
+                    if (d25[i] === "J25" ) { setTimeout(botSays,600,"\n Q) What to do after LP3?\nA) You'll be given preparatory leave (PL) from April to June after that your Live Projects will be given after the first week of June.\n Reply with ** to go previous menu\n\n") } 
+                }
+               
+                else if ( question.includes(d26[i]) ) {
+                    Else = false;
+                    if (d26[i] === "K26" ) { setTimeout(botSays,600,"\n Q) Can we skip any training if we are already clear with the basics?\nA) No, these pieces of training will cover basics and there is no harm in brushing up your skills before you start with the assignments later.\n Reply with ** to go previous menu\n\n") } 
+                }
+                else if ( question.includes(d27[i]) ) {
+                    Else = false;
+                    if (d27[i] === "L27" ) { setTimeout(botSays,600,"\n Q) Is it ok to clock-out before an hour is completed if the tasks are completed? Do we need to clock-in and compulsorily complete 7 hours a week even if the tasks are completed?\nA) If the tasks are completed, there is no need to clock-in and clock-out unnecessarily for hours. However, you should keep a track of all the updates of the internship being posted on the groups.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d28[i]) ) {
+                    Else = false;
+                    if (d28[i] === "M28" ) { setTimeout(botSays,600,"\n Q) Resource links not working. What to do? Should we skip?\nA) Please do not skip any piece of training, in case you're not able to access any link please message to Cloud Counselage HR and drop an email to hrsupport@cloudcounselage.in regarding the same.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d29[i]) ) {
+                    Else = false;
+                    if (d29[i] === "N29" ) { setTimeout(botSays,600,"\n Q) What to do when our university exams start?\nA) We have provided our interns with preparatory leave from the exam season, nevertheless, you are free to work on your LP3 assignment, but we suggest to concentrate on your exams first.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d30[i]) ) {
+                    Else = false;
+                    if (d30[i] === "O30" ) { setTimeout(botSays,600,"\n Q) Is it okay to mention this internship as ongoing for college records?\nA) Yes, we'll provide every intern a joining letter as soon as all interns are inducted. \n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d31[i]) ) {
+                    Else = false;
+                    if (d31[i] === "P31" ) { setTimeout(botSays,600,"\n  Q) Can we do another internship with IP?\nA) Yes, you can do another internship outside of Cloud Counselage but please ensure to provide 1 hour a day or 7 hours a week for IP.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d32[i]) ) {
+                    Else = false;
+                    if (d32[i] === "F32" ) { setTimeout(botSays,600,"\n Q) What to do after Live Projects? Are we getting an offer letter/Stipend?\nA) Submit your project and once it's reviewed as successful, collect your internship letter. Your internship is complete after this. There is no stipend for live projects. If your work is sublime and we have a vacancy in the position you're interested in, you may be offered a chance for interviews and can get an offer letter from Cloud Counselage Pvt. Ltd.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d33[i]) ) {
+                    Else = false;
+                    if (d33[i] === "G33" ) { setTimeout(botSays,600,"\n Q) When will we get a joining letter? \nA) Joining letter to all the interns will be provided on or before the 31st of March 2020.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d34[i]) ) {
+                    Else = false;
+                    if (d34[i] === "H34" ) { setTimeout(botSays,600,"\n Q) When will we get an internship completion letter?\nA) This is a three (3) month internship conducted in the month of March, June & July 2020. You will receive your internship experience letter in August during the convocation only if you successfully submit your Live Project.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d35[i]) ) {
+                    Else = false;
+                    if (d35[i] === "I35" ) { setTimeout(botSays,600,"\n Q) What will be the projects in AI/ ML/ etc. technologies in LP3/ Live Projects? \nA) Projects in LP3 and Live Projects will be relevant to your training and ongoing projects in Cloud Counselage. The actual problem statements will only be given when the LP3/ Live Project phase is in progress to keep the interns focused on LP1/ LP2.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d36[i]) ) {
+                    Else = false;
+                    if (d36[i] === "J36" ) { setTimeout(botSays,600,"\n Q) Not able to see the task as not part of the IP workgroup. \nA) Please message ‘Cloud Counselage HR’ in Bitrix24 \n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d37[i]) ) {
+                    Else = false;
+                    if (d37[i] === "K37" ) { setTimeout(botSays,600,"\n Q) Live Project/ LP3 has to be submitted individually or it will be a group project? \nA) All the LP3/  Live Projects are on an individual scale.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d38[i]) ) {
+                    Else = false;
+                    if (d38[i] === "L38" ) { setTimeout(botSays,600,"\n Q) How can we check our weekly hours? \nA) In the menu select 'time and reports' ->worktime and then you could see your worktime or click on this link once you’re logged in to Bitrix24; https://cloudcounselage24.bitrix24.com/timeman/timeman.php\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d39[i]) ) {
+                    Else = false;
+                    if (d39[i] === "M39" ) { setTimeout(botSays,600,"\n Q) Is it necessary to attend LP1 for other domains as well if we want to take its training. \nA) LP1 training is common across all the technologies\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d40[i]) ) {
+                    Else = false;
+                    if (d40[i] === "N40" ) { setTimeout(botSays,600,"\n Q) Why only this training for LP2?\nA) They are our training partners and we have handpicked this training to cover a certain topic for you. These training cover from the very basic to intermediate level and is the perfect medium for you to have a starting point.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d41[i]) ) {
+                    Else = false;
+                    if (d41[i] === "O41" ) { setTimeout(botSays,600,"\n Q) Could I have done this training from other websites/ resources?\nA) Yes, you could have but the reason to have these videos is to keep an enclosed environment for you to watch these tutorials without distractions with quizzes and forums for you to discuss in. As mentioned earlier, our main aim is to provide you with a starting point and baseline for the technology of your choice.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d42[i]) ) {
+                    Else = false;
+                    if (d42[i] === "F42" ) { setTimeout(botSays,600,"\n  Q) Can I do certification for the training provided in LP2? \nA) Yes, Cloud Counselage has purposefully partnered with Edureka so as to enable our interns to get the advantage of the corporate benefits at 'no profit no loss' basis for Cloud Counselage, that we receive from the partnership. Being our interns, you can get huge discounts on the certifications you choose to enrol for through Cloud Counselage and Edureka. In case you want to know more about the discounts offered, please reach out to ‘Cloud Counselage HR’ or write to hrsupport@cloudcounselage.in.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d43[i]) ) {
+                    Else = false;
+                    if (d43[i] === "G43" ) { setTimeout(botSays,600,"\n Q) The videos of LP2 are taking too much time to load.\nA) We have uploaded the videos of the highest quality and best resolution which has resulted in some videos being over 1 GB as they are of hours in duration. To experience these high definition videos we request you to wait at least 5 minutes or more; depending on your computer's RAM and internet connection.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d44[i]) ) {
+                    Else = false;
+                    if (d44[i] === "H44" ) { setTimeout(botSays,600,"\n Q) Are LP1/ LP2/ LP3 a part of the Live Project?\nA) LP1/ LP2/ LP3 is your preparation for the Live Project. All the phases LP1/ LP2/ LP3/ Live Project are a part of this internship.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d45[i]) ) {
+                    Else = false;
+                    if (d45[i] === "I45" ) { setTimeout(botSays,600,"\n Q) Will these training be enough for us to complete the LP3 and Live Project. \nA) The set of training is not exhaustive and you are required to keep learning about the technology on your own to excel in your Live Project.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d46[i]) ) {
+                    Else = false;
+                    if (d46[i] === "J46" ) { setTimeout(botSays,600,"\n Q) How do I access my quiz?\nA) As mentioned in the video: -\nStep1: Go to lp1 module\nStep2: Select module\nStep3: Put token (it will direct you to the home screen if the token is correct)\nStep4: Again go to lp1 module n select that module\nStep5: You will get the access by now\nStep6: Register there (each time for every module)\nStep7: Give the quiz\nStep8: Logout\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d47[i]) ) {
+                    Else = false;
+                    if (d47[i] === "K47" ) { setTimeout(botSays,600,"\n Q) By when will we receive access to Bitrix24?\nA) If you have submitted the ‘New Joinee Form’ after the 1st of March, please wait till the 31st of March to receive your access.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d48[i]) ) {
+                    Else = false;
+                    if (d48[i] === "L48" ) { setTimeout(botSays,600,"\n Q) Can my friends still apply for the Internship Program (IP) - Maharashtra? Can we create awareness about this internship? Can we be the representative for Cloud Counselage in our college?\nA) Yes, your friends can apply till the 30th of March 2020; https://www.cloudcounselage.com/ipmaharashtra/. To be a student representative of Cloud Counselage, please contact Cloud Counselage HR.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                else if ( question.includes(d49[i]) ) {
+                    Else = false;
+                    if (d49[i] === "M49" ) { setTimeout(botSays,600,"\n  Q) Is the induction online or offline?\nA) As a precautionary measure to safeguard our intern’s health, we have decided to conduct all the inductions online.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d50[i]) ) {
+                    Else = false;
+                    if (d50[i] === "N50" ) { setTimeout(botSays,600,"\n Q) I am trying to complete social media tasks. I completed that day and clicked finish but it didn't show finished in the task menu. What should I do?\nA) Our team will verify and then only your task shall be accepted as completed. Please wait till the verification's complete.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d51[i]) ) {
+                    Else = false;
+                    if (d51[i] === "O51" ) { setTimeout(botSays,600,"\n Q) My Efficiency is 0% what should I do?\nA) Ensure that you have clicked ‘Start’ when you resume a task, the ‘Finish’ button gets active only after the task is started. Once you complete the task you can then click on ‘Finish’ and then the efficiency is updated in the system. However, please raise this issue with the Cloud Counselage HR, as they will look at it on a case to case basis.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d52[i]) ) {
+                    Else = false;
+                    if (d52[i] === "F52" ) { setTimeout(botSays,600,"\n  Q) Will you provide mentorship or doubt clearing sessions in this internship?\nA) As this is an internship you’re expected to do self-learning, mentorship is not part of an internship. However, we have created forums to resolve your doubts in the form of workgroups. As an intern ensure that you are part of relevant workgroups, i.e. ‘202003 - IP’ and your resp. Technology workgroup. In case, you are not a part of these workgroups, please reach out to ‘Cloud Counselage HR’ on Bitrix24 Chat.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d53[i]) ) {
+                    Else = false;
+                    if (d53[i] === "G53" ) { setTimeout(botSays,600,"\n Q) Problem statements of the Live Project will be chosen by the intern or will be provided by Cloud Counselage?\nA) Live Projects will be provided by Cloud Counselage as these are the ongoing projects of Cloud Counselage and your opportunity to create an impact in the organisation.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d54[i]) ) {
+                    Else = false;
+                    if (d54[i] === "H54" ) { setTimeout(botSays,600,"\nQ) Can we be a part of your future development team?/ Can we be hired by Cloud Counselage after this internship? \nA) All our current interns if performing well in our internship programs can be offered an opportunity to interview for various positions in Cloud Counsealge. Many of our now full-time employees were interns in Cloud Counselage.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d55[i]) ) {
+                    Else = false;
+                    if (d55[i] === "I55" ) { setTimeout(botSays,600,"\n Q) Can we visit the office? How many times do we have to visit the office for this internship?\nA) As this is an online internship you do not need to visit the offices in the duration of this internship. You will be requested to visit the Vikhroli office only once; i.e. on your internship convocation day which will be in July 2020. Nevertheless, you can visit our offices with an appointment.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d56[i]) ) {
+                    Else = false;
+                    if (d56[i] === "J56" ) { setTimeout(botSays,600,"\n Q) Can we extend this internship? \nA) Yes, you can extend your internship by being part of our other online programs like, ‘Online Career Program’.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d57[i]) ) {
+                    Else = false;
+                    if (d57[i] === "K57" ) { setTimeout(botSays,600,"\n Q) If we are working on more than one technology, are those technologies added to the certificate? \nA) You are not restricted from doing the training of other technologies but you will only be given an internship certificate of the technology you’re selected for.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d58[i]) ) {
+                    Else = false;
+                    if (d58[i] === "L58" ) { setTimeout(botSays,600,"\n Q) Will Live Projects have only one technology or a mixture of technologies?\nA) Live Projects will have only your part of technology even if there are multiple technologies that are a part of the project, you will be working only on the part that covers your technology.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d59[i]) ) {
+                    Else = false;
+                    if (d59[i] === "M59" ) { setTimeout(botSays,600,"\nQ) I forgot to clock in for a few days, will this affect my internship?\nA) This could have an adverse effect on your internship, please contact Cloud Counsealge HR and provide a genuine reason to miss clock in/ clock out. Also, please start performing your clock in/ clock out now.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d60[i]) ) {
+                    Else = false;
+                    if (d60[i] === "N60" ) { setTimeout(botSays,600,"\n Q) Will I get LP3 and Live project of technology other than what I am selected for?\nA) No, you will receive LP3 and Live Projects of your respective technology.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d61[i]) ) {
+                    Else = false;
+                    if (d61[i] === "O61" ) { setTimeout(botSays,600,"\n Q) I have not been added to the technology I preferred to work on? \nA) We do understand that you might be interested in other technologies and are eager to learn more, but we have prescribed the technologies based on your first inputs and cannot change your base technology. Nevertheless, you do have the opportunity to go through the training of all the technologies.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d62[i]) ) {
+                    Else = false;
+                    if (d62[i] === "F62" ) { setTimeout(botSays,600,"\n Q) What are the company policies for IP interns?\nA) The company policies will be published on www.cloudcounselage.co.in/ippolicies\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d63[i]) ) {
+                    Else = false;
+                    if (d63[i] === "G63" ) { setTimeout(botSays,600,"\n Q) I have not got the acknowledgment from you regarding the weekly report.\nA) Once you submit your weekly report, your supervisor and the HR team shall take the cognizance. They would reach out to you in case of discrepancies, so you need not worry about the confirmation.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d64[i]) ) {
+                    Else = false;
+                    if (d64[i] === "H64" ) { setTimeout(botSays,600,"\n Q) In my work time I can see one exclamation mark?/ What does the remaining time mean?\nA) It is showing the remaining time because it's configured for 8 working hours per day. Our interns need to only make sure that they are online for 1 hour per day or 7 hours a week.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d65[i]) ) {
+                    Else = false;
+                    if (d65[i] === "I65" ) { setTimeout(botSays,600,"\n Q) I could not attend the induction last time, can I get an online induction again?/ I want some points said in the introduction, where can I get them.\nA) We have created a separate page with a pre-recorded induction, please visit it; https://www.cloudcounselage.co.in/ipinduction\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d66[i]) ) {
+                    Else = false;
+                    if (d66[i] === "J66" ) { setTimeout(botSays,600,"\n Q) Can I just finish the task that you have just uploaded as I have attended the live induction session on 22nd of march\nA) Yes. Although, you can always revisit the induction so that you can review what has been said in it.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+                else if ( question.includes(d67[i]) ) {
+                    Else = false;
+                    if (d67[i] === "K67" ) { setTimeout(botSays,600,"\n Q) I have got another attachment called ‘noname’ or ‘win.dat’ with my Appointment letter, what should I do about it? Will it cause any harm?\nA) We have observed that there is such an attachment for a few mailing service providers like Gmail and yahoo, please ignore this attachment. It won’t cause any harm to your system.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d68[i]) ) {
+                    Else = false;
+                    if (d68[i] === "L68" ) { setTimeout(botSays,600,"\n Q) Where do we push the code in LP3?\nA) Please push you to code in a public repo of your GitHub account if required by your LP3 assignment.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d69[i]) ) {
+                    Else = false;
+                    if (d69[i] === "M69" ) { setTimeout(botSays,600,"\n Q) Where should we share our hacker rank id/ where should we share the link/ anything relate to LP3 assignment submission?\nA) For now, please concentrate on completing the task. We will ask all the interns to submit their work in the first week of June. Ensure you make it up to the mark till then as there would be no extension given that time.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d70[i]) ) {
+                    Else = false;
+                    if (d70[i] === "N70" ) { setTimeout(botSays,600,"\n Q) When will my review on social media update task be done?\nA) We will review this task in May 2020.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d71[i]) ) {
+                    Else = false;
+                    if (d71[i] === "O71" ) { setTimeout(botSays,600,"\n  Q) Live project's use case will be provided or can we have our own use case?\nA) Live project's use case will strictly be provided by Cloud Counselage and you cannot choose your own use case.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d72[i]) ) {
+                    Else = false;
+                    if (d72[i] === "F72" ) { setTimeout(botSays,600,"\n Q) Is it necessary to clock-in if I am done with my tasks?\nA) Yes, it is mandatory to do, we are trying to include some more tasks due to the current scenarios, but adherence to clock-in/ clock-out policy is utterly important.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d73[i]) ) {
+                    Else = false;
+                    if (d73[i] === "G73" ) { setTimeout(botSays,600,"\n Q) Can we be online after 1 hr in a day?\nA) Yes, you can be.\n Reply with ** to go previous menu\n\n") } 
+                }
+             
+                else if ( question.includes(d74[i]) ) {
+                    Else = false;
+                    if (d74[i] === "H74" ) { setTimeout(botSays,600,"\n Q)  I am stuck in LP3/ Live project with a technical issue, Is there any technical person who can help in this?\nA) As mentorship/ hand-holding is not part of an internship by definition, we would not provide any technical help. Nevertheless, feel free to ask your doubt in your respective workgroup chat/ in the community or Google it :)\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d75[i]) ) {
+                    Else = false;
+                    if (d75[i] === "I75" ) { setTimeout(botSays,600,"\n Q) One of my friends had applied for the IP but she didn't receive any further updates.\nA) Please ask them to send a mail to hrsupport@cloudcounselage.in and wait till 30th April 2020 for a reply.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d76[i]) ) {
+                    Else = false;
+                    if (d76[i] === "J76" ) { setTimeout(botSays,600,"\n Q) I have a query with respect to LP3, what should I do and whom should I ask?\nA) As mentioned in the '202003-IP' workgroup, please ask all queries related to LP3 in your technology workgroup only and tag Jayanth G S  in your message.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d77[i]) ) {
+                    Else = false;
+                    if (d77[i] === "K77" ) { setTimeout(botSays,600,"\nQ) I didn't get my appointment letter yet.\nA) If you had not attended the live induction and have registered in the pre-recorded session after 4 PM, 31st March. Then you'll get your joining letter by 30th April 2020. If you have otherwise, please a mail to hrsupport@cloudcounselage.in or ping 'Cloud Counselage HR' in B24.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d78[i]) ) {
+                    Else = false;
+                    if (d78[i] === "L78" ) { setTimeout(botSays,600,"\n Q) For some reason, I'm unable to download my LP3 assignment problem statement document shared on LP3 page, is there any other way I can get it?\nA) Since some of you are not able to download, please find the same document in your technology drive in the folder LP3. We have made an announcement in your respective technology workgroup as well, please check.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d79[i]) ) {
+                    Else = false;
+                    if (d79[i] === "M79" ) { setTimeout(botSays,600,"\n Q) If my technology is IOT/ AI/ ML/ etc., do I still have to complete the mandatory training for LP1 'Cloud Computing'?\nA) Yes, you'll need to complete the mandatory training as cloud computing is fundamental to many technologies and this additional knowledge will help you in your career.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d80[i]) ) {
+                    Else = false;
+                    if (d80[i] === "N80" ) { setTimeout(botSays,600,"\n Q)When will the step 3 of the internship program start?\nA)Hope you and your family are in the best of health given the current scenario and you are making the most of your time through the 'Internship Program' by Cloud Counselage.According to the schedule of this internship program, some of you must have completed steps 1 and 2 of your internship and some of you must be in the process of completing step 2.Please note that as per the program schedule :(https://www.cloudcounselage.com/ipmaharashtra/), the following are the dates for entering step 3, wherein interns take preparatory leaves for exams:\na) 16th April 2020 - access given before 31st March 2020\nb) 01st May 2020 - access given after 31st March 2020Kindly note that we are in touch with the DTE - Maharashtra for the exam schedules of various universities in Maharashtra and the start of step 4 will be announced accordingly via individual email and our social media pages.While step 3 is in progress, you do not need to login to Bitrix24 or submit your timesheet until you are in step 4.All the best and please stay safe! See you soon in step 4.\n Reply with ** to go previous menu\n\n") } 
+                }
+
+                
+                else if ( question.includes(d81[i]) ) {
+                    Else = false;
+                    if (d81[i] === "O81" ) { setTimeout(botSays,600,"\n  Q) I  am getting an error:: Exception: SQLSTATE[HY000]: General error: 1 no such table: layout, what should I do?\nA) This is due to many webpages opened, please close your browser and try again or you can open a new incognito tab and try again.\n Reply with ** to go previous menu\n\n") } 
+                }
+                
+        
+
+                else if (question.includes(Actions[i])) {
+                    Else = false; 
+                    if (question.includes("YES"))
+                     { 
+                         setTimeout(botSays, 600, "\nBot : Hi, how may I help you?\nPlease reply with the numbers to the corresponding questions.\n   A.what is IP?\n   B.How is IP?\n   C.Bitrix24 Issues \n   D.IP training issues \n   E.Jobs available\n\n") } else { setTimeout(botSays, 600, "\nBot : How can I help?  Use my commands !Menu & !Tutorial to see what I can do.") }
+                     }
+
+
+                else if (question.includes(Questions[i])) {
+                    Else = false;
+                     if (Questions[i].includes("HTML")) { setTimeout(botSays, 600, "\nBot : Ask my creator. Go for it. Post your question in the comments, he'll try to help you. I'm just a code, I don't know HOW to code.") } 
+                     else { setTimeout(botSays, 600, "\nBot : How can I help? Use my commands !Menu & !Tutorial to see what I can do.") }
+                }
+                 
+                else if(question === "hmm"){ setTimeout(botSays, 600, "\nBot : Ask my creator. Go for it. Post your question in the comments, he'll try to help you. I'm just a code, I don't know HOW to code.")}
+    
+                else if (question.includes(Stars[i])) {
+                    Else = false; 
+                    if (question.includes("MORE"))
+                     { 
+                         setTimeout(botSays, 600, "\nBot : Hi, how may I help you?\nPlease reply with the numbers to the corresponding questions.\n   A.what is IP?\n   B.How is IP?\n   C.Bitrix24 Issues \n   D.IP training issues \n   E.Jobs available\n\n") } else { setTimeout(botSays, 600, "\nBot : How can I help?  Use my commands !Menu & !Tutorial to see what I can do.") }
+                     }
+
+                     
+                  else if (question.includes(Hello[i])) {
+                  var reactHello = Hello[i];
+                  reactHello = reactHello.toLowerCase();
+                  reactHello = reactHello.charAt(0).toUpperCase() + reactHello.slice(1);
+                  var reactGreeting = "";
+                  var reactPleasant = ""
+                    Else = false;
+                      setTimeout(botSays, 600, "\nBot : " + reactHello + ".")
+                } else { } }  setTimeout( function() { if (Else === true) {botSays("\n\n**Error 404: Response Not Found."); } } , 700);  setTimeout( function() {Else = true; botChat.scrollTop = botChat.scrollHeight;}, 730)
+            } function botSays(x) {
+                document.getElementsByTagName("textarea")[0].innerHTML += x;
+            } function youSay(x) { botSays("\n"+ you + " \ : " + x)
+            }
+            function youDo(x) { botSays("\n"+ you + " " + x)                                            
+            } function enterButton(e, x) { if (e.keyCode == 13) { answer(x); }   } </script></body>
+</html>
